@@ -1,5 +1,5 @@
 # Lorem Ipsum
-Lorem ipsum dolor sit amet, [consectetur adipiscing elit](https://example.org/). Nulla nec justo vulputate, tincidunt nulla ac, tristique lacus. Praesent pellentesque enim quam, ac semper libero pellentesque eget. Etiam finibus, risus non luctus posuere, ligula mauris pharetra odio, vitae ornare turpis elit eu felis. Integer eleifend porttitor aliquet. Nam nec ultricies mauris. Maecenas at semper arcu, non luctus sem. Nunc mollis dictum mauris, ac consectetur sem imperdiet sed. Duis et libero nulla.
+Lorem ipsum dolor sit amet, [consectetur adipiscing elit](https://example.org/). Praesent faucibus ligula a odio interdum, ut consectetur turpis accumsan. Praesent non orci eget elit interdum blandit nec non nibh. Praesent pellentesque enim quam, ac semper libero pellentesque eget. Etiam finibus, risus non luctus posuere, ligula mauris pharetra odio, vitae ornare turpis elit eu felis. Integer eleifend porttitor aliquet. Nam nec ultricies mauris. Maecenas at semper arcu, non luctus sem. Nunc mollis dictum mauris, ac consectetur sem imperdiet sed. Duis et libero nulla.
 
 ![A field of sunflowers.](https://www.wikiwrimo.org/w/images/Example.jpg)
 
@@ -11,6 +11,7 @@ Lorem ipsum dolor sit amet, [consectetur adipiscing elit](https://example.org/).
 |Apples| $5 |
 |Bananas| $2 |
 |Oranges| $7.50 |
+|Plums| $6.25 |
 
 Here is a list of stuff:
 * java
