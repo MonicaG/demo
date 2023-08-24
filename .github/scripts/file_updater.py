@@ -1,6 +1,7 @@
 import logging
 import sys
 import os
+import yaml
 
 def update_file(file_path):
    with open(file_path, 'a') as file:
