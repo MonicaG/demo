@@ -8,8 +8,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+ 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,6 +16,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,7 +30,7 @@ jobs:
 
       - name: Debug ref_name
         run: |
-          echo "Ref name: ${{ github.ref_name }}"
+          echo "Ref name: ${{ github.head_ref }}"
     
       - name: Setup python
         uses: actions/setup-python@v4
@@ -60,4 +62,4 @@ jobs:
           git status
           git add -A 
           git commit -m "Appended to file"
-          git push origin HEAD:${{ github.ref_name }}
+          git push origin HEAD:${{  github.head_ref }}
