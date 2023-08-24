@@ -53,4 +53,4 @@ jobs:
           git status
           git add -A 
           git commit -m "Appended to file"
-          git push origin ${{ github.ref_name }}
+          git push origin HEAD:${{ github.head_ref }}
