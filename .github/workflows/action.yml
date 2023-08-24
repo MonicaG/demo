@@ -39,7 +39,6 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: 'Append to file'    
         run: python ./.github/scripts/file_updater.py ./docs/file1.md
       - name: 'Check for changes'
