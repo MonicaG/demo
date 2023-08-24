@@ -24,6 +24,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Debug head_ref
+        run: |
+          echo "Head Ref: ${{ github.head_ref }}"
+    
       - name: Setup python
         uses: actions/setup-python@v4
         with:
@@ -53,4 +57,4 @@ jobs:
           git status
           git add -A 
           git commit -m "Appended to file"
-          git push origin HEAD:${{ github.head_ref }}
+          git push 
