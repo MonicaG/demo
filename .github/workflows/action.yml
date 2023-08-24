@@ -26,9 +26,9 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Debug head_ref
+      - name: Debug ref_name
         run: |
-          echo "Head Ref: ${{ github.head_ref }}"
+          echo "Ref name: ${{ github.ref_name }}"
     
       - name: Setup python
         uses: actions/setup-python@v4
@@ -38,8 +38,8 @@ jobs:
       - name: 'Configure git'
       # From https://github.com/orgs/community/discussions/26560#discussioncomment-3531273
         run: |
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: 'Append to file'    
         run: python ./.github/scripts/file_updater.py ./docs/file1.md
@@ -60,4 +60,4 @@ jobs:
           git status
           git add -A 
           git commit -m "Appended to file"
-          git push origin HEAD:${{ github.head_ref }}
+          git push origin HEAD:${{ github.ref_name }}
