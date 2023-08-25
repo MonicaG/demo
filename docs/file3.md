@@ -2,4 +2,4 @@
 
 This is file 3.
 
-Here is some more text.
+Here is some more text. And more text
