@@ -7,3 +7,4 @@ This is file 2.
 This is a subheading.
 
 [This is a link](https://example.com)
+
