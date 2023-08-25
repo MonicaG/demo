@@ -7,4 +7,4 @@ assignees: MonicaG
 
 ---
 
-The index.md file changed with PR#
+The index.md file changed with PR {{ tools.context.pullRequest.pull_number }}
