@@ -57,7 +57,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
 
       - name: 'Append to file'    
-        run: python ./.github/scripts/file_updater.py ./docs/file1.md
+        run: python ./.github/scripts/file_updater.py ./docs/junk.md
 
       - name: 'Check for changes'
         id: check_for_changes

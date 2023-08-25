@@ -15,6 +15,7 @@ if __name__ == "__main__":
   target_file= sys.argv[1]
   if not os.path.isfile(target_file):
     logging.error(f"{target_file} is not a valid file")
+    sys.exit(1)
   else:
     logging.info(f"Updating {target_file}")
     update_file(target_file)
