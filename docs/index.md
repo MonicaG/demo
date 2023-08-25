@@ -31,6 +31,7 @@ Here is a list with sublists:
   * item 3 a
 
 **Bold text** 
+*Italic text*
 
 
 ## Curabitur maximus 
