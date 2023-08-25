@@ -95,8 +95,10 @@ jobs:
         with:
           files: docs/index.md
             
-      - name: Run step if any file(s) in the docs folder change
+      - name: Create issue if index.md changed
         if: steps.changed-index-file.outputs.any_changed == 'true'
         run: |
           echo "One or more files in the docs folder has changed."
           echo "List all the files that have changed: ${{ steps.changed-index-file.outputs.all_changed_files }}"
+          echo "Creating new issue..."
+          cat .github/ISSUE_TEMPLATE/file-changed.md | sed -e "s/{{body}}/index.md file changed with PR ${{ github.event.pull_request.number }}/" | github-issue create
