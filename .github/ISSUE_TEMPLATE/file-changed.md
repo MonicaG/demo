@@ -7,4 +7,4 @@ assignees: MonicaG
 
 ---
 
-The index.md file changed with PR ${{ github.event.pull_request.number }}
+The index.md file changed with PR {{ pullRequest.number }}
