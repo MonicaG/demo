@@ -101,8 +101,6 @@ jobs:
               repo: context.repo.repo,
               head: '${{ env.BRANCH_NAME}}',
               base: 'main',
-              body: [
-                'Automatic updates applied by transform.yaml. Review changes and merge.'
-              ].join('\n')
+              body: 'Automatic updates applied by transform.yaml. Review changes and merge.'
             });
   
