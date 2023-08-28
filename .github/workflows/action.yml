@@ -80,30 +80,3 @@ jobs:
           git commit -m "Appended to file"
           git push origin HEAD:${{  github.head_ref }}
   
-  check-for-changed-file:
-    runs-on: ubuntu-latest     
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      
-      - name: Did index.md change?
-        id: changed-index-file
-        uses: tj-actions/changed-files@v38
-        with:
-          files: docs/index.md
-      
-      - name: Set PR Number
-        id: pr_number
-        run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-
-      - name: Create issue if index.md changed
-        if: steps.changed-index-file.outputs.any_changed == 'true'
-        uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          filename: .github/ISSUE_TEMPLATE/file-changed.md
-          update_existing: true
