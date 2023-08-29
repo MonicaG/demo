@@ -35,7 +35,8 @@ jobs:
       - name: Get sha
         if: steps.changed-index-file.outputs.any_changed == 'true'
         run: |
-          echo 'FILE_SHA='(git log -n 1 --pretty=format:%H -- docs/index.md) >> $GITHUB_ENV
+          LAST_COMMIT_SHA=$(git log -n 1 --pretty=format:%H -- docs/index.md)
+          echo "FILE_SHA=$LAST_COMMIT_SHA" >> $GITHUB_ENV
 
       - name: Create issue with gh
         if: steps.changed-index-file.outputs.any_changed == 'true'
