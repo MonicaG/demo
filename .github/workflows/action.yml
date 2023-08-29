@@ -58,16 +58,6 @@ jobs:
       - name: 'Create branch'
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git fetch origin
-          git branch -r 
-          git branch -r --list origin/$BRANCH_NAME
-          BRANCH=$(git branch -r --list origin/$BRANCH_NAME)
-          echo "Branch is $BRANCH"
-          if [ -n "$BRANCH" ]; then
-            echo "Has branch will delete"
-            git branch -D $BRANCH_NAME
-          fi
-          echo "Checking out branch"
           git checkout -b $BRANCH_NAME
 
       - name: 'Append to file'    
