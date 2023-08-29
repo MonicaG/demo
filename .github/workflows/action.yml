@@ -90,16 +90,7 @@ jobs:
 
       - name: 'Create Pull Request'
         if: ${{ steps.check_for_changes.outputs.HAS_CHANGES == 1 }}
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            await github.rest.pulls.create({
-              title: 'Automatic updates",
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              head: '${{ env.BRANCH_NAME }}',
-              base: 'main',
-              body: 'Automatic updates applied by transform.yaml. Review changes and merge.'
-            });
-  
+        run: |
+          gh pr create -B main -H $BRANCH_NAME --title 'Automated file updates' --body 'Created by Github action'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
