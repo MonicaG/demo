@@ -38,8 +38,21 @@ jobs:
         id: pr_number
         run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 
-      - name: Create issue if changed file
-        if: steps.changed-index-file.outputs.any_changed == 'true'
-        run: gh issue create --title "Update homepage index.md file" --body "The upstream index.js file changed with PR \#$PR_NUMBER. Update the [index.md](../docs/index.md) file to reflect the changes." --assignee MonicaG
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Create issue if changed file
+      #   if: steps.changed-index-file.outputs.any_changed == 'true'
+      #   run: gh issue create --title "Update homepage index.md file" --body "The upstream index.js file changed with PR \#$PR_NUMBER. Update the docs/index.md file to reflect the changes." --assignee MonicaG
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 'Create Pull Request'
+        if: ${{ steps.changed-index-file.outputs.any_changed == 'true' }}
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.DEMO_CI_TOKEN }}
+          script: |
+            await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: "File changed",
+            body: "Please review the newer version and address the changes. "
+            });
