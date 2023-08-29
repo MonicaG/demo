@@ -54,5 +54,5 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             title: "File changed",
-            body: "Please review the newer version and address the changes. "
+            body: "Please review the newer version and address the changes. PR #process.env.PR_NUMBER"
             });
