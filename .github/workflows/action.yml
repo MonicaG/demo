@@ -59,7 +59,8 @@ jobs:
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git branch -r 
-          BRANCH=$(git branch -r origin/$BRANCH_NAME)
+          git branch -r --list origin/$BRANCH_NAME
+          BRANCH=$(git branch -r --list origin/$BRANCH_NAME)
           echo "Branch is $BRANCH"
           if [ -n "$BRANCH" ]; then
             echo "Has branch will delete"
