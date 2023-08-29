@@ -34,7 +34,6 @@ Here is a list with sublists:
 *italic item*
 ~~strike through~~
 
-test test
 
 
 ## Curabitur maximus 
