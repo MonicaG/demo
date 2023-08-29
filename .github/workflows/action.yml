@@ -58,6 +58,7 @@ jobs:
       - name: 'Create branch'
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch origin
           git branch -r 
           git branch -r --list origin/$BRANCH_NAME
           BRANCH=$(git branch -r --list origin/$BRANCH_NAME)
