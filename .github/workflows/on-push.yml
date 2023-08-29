@@ -23,11 +23,17 @@ jobs:
           files: docs/index.md
       
 
-      - name: Create issue if index.md changed
+      # - name: Create issue if index.md changed
+      #   if: steps.changed-index-file.outputs.any_changed == 'true'
+      #   uses: JasonEtco/create-an-issue@v2
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     filename: .github/ISSUE_TEMPLATE/file-changed.md
+      #     update_existing: true
+
+      - name: Create issue with gh
         if: steps.changed-index-file.outputs.any_changed == 'true'
-        uses: JasonEtco/create-an-issue@v2
+        run: gh issue create --title "New Issue report" --body "The index.md file changed with commit ${{ github.sha }}" --assignee MonicaG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          filename: .github/ISSUE_TEMPLATE/file-changed.md
-          update_existing: true
