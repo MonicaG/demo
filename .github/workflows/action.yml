@@ -95,7 +95,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             await github.rest.pulls.create({
-              title: 'Automatic updates"
+              title: 'Automatic updates",
               owner: context.repo.owner,
               repo: context.repo.repo,
               head: '${{ env.BRANCH_NAME }}',
