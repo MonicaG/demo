@@ -32,8 +32,13 @@ jobs:
       #     filename: .github/ISSUE_TEMPLATE/file-changed.md
       #     update_existing: true
 
+      - name: Get sha
+        if: steps.changed-index-file.outputs.any_changed == 'true'
+        run: |
+          echo "FILE_SHA=git log -n 1 --pretty=format:%H -- docs/index.md" >> $GITHUB_ENV
+
       - name: Create issue with gh
         if: steps.changed-index-file.outputs.any_changed == 'true'
-        run: gh issue create --title "New Issue report" --body "The index.md file changed with commit ${{ github.sha }}" --assignee MonicaG
+        run: gh issue create --title "New Issue report" --body "The index.md file changed with latest push $FILE_SHA. Review and update." --assignee MonicaG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
