@@ -86,6 +86,6 @@ jobs:
       - name: 'Create Pull Request'
         if: ${{ steps.check_for_changes.outputs.HAS_CHANGES == 1 }}
         run: |
-          gh pr create -B main -H $BRANCH_NAME --title 'Automated file updates' --body 'Created by Github action'
+          gh pr create -B main -H $BRANCH_NAME --title 'Automated file updates' --body 'Created by Github action' --assignee MonicaG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
