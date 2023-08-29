@@ -98,7 +98,7 @@ jobs:
               title: 'Automatic updates"
               owner: context.repo.owner,
               repo: context.repo.repo,
-              head: '${{ env.BRANCH_NAME}}',
+              head: '${{ env.BRANCH_NAME }}',
               base: 'main',
               body: 'Automatic updates applied by transform.yaml. Review changes and merge.'
             });
