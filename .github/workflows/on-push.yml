@@ -2,9 +2,10 @@ name: check for changed file
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on pull request events but only for the "main" branch
-  push:
+  pull_request:
     branches: [ "main" ]
+    types: [opened]
+
 
 jobs:
   check-for-changed-file:
@@ -32,14 +33,13 @@ jobs:
       #     filename: .github/ISSUE_TEMPLATE/file-changed.md
       #     update_existing: true
 
-      - name: Get sha
+      - name: Set PR Number
         if: steps.changed-index-file.outputs.any_changed == 'true'
-        run: |
-          LAST_COMMIT_SHA=$(git log -n 1 --pretty=format:%H -- docs/index.md)
-          echo "FILE_SHA=$LAST_COMMIT_SHA" >> $GITHUB_ENV
+        id: pr_number
+        run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 
-      - name: Create issue with gh
+      - name: Create issue if changed file
         if: steps.changed-index-file.outputs.any_changed == 'true'
-        run: gh issue create --title "New Issue report" --body "The index.md file changed with latest push $FILE_SHA. Review and update." --assignee MonicaG
+        run: gh issue create --title "Update homepage index.md file" --body "The upstream index.js file changed with PR#$PR_NUMBER. Update the [index.md](../../docs/index.md) file to reflect the changes." --assignee MonicaG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
