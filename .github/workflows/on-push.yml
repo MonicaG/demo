@@ -54,7 +54,7 @@ jobs:
             await github.rest.issues.create({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            assignee: MonicaG,
+            assignee: 'MonicaG',
             title: "File changed",
             body: `Please review the newer version and address the changes. PR #${PR_NUMBER}`
             });
