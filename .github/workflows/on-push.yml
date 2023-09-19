@@ -37,6 +37,6 @@ jobs:
           echo "Workflow dispatch prod"
 
       - name: Ran from workflow dispatch - dev
-        if: ${{ github.event_name == 'workflow_dispatch' }} && ${{ inputs.deploy_location == 'dev' }} 
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy_location == 'dev'
         run: |
           echo "Workflow dispatch dev"
