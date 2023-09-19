@@ -2,10 +2,19 @@ name: check for changed file
 
 # Controls when the workflow will run
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
-    types: [opened]
 
+  workflow_dispatch:
+    inputs:
+      deploy_location:
+        description: 'Deploy to'
+        required: true
+        default: dev
+        type: choice
+        options:
+        - dev
+        - prod  
 
 jobs:
   check-for-changed-file:
@@ -16,45 +25,18 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      
-      - name: Did index.md change?
-        id: changed-index-file
-        uses: tj-actions/changed-files@v38
-        with:
-          files: docs/index.md
-      
+  
+      - name: Ran from workflow dispatch - prod
+        run: |
+            echo "Should always run"    
 
-      # - name: Create issue if index.md changed
-      #   if: steps.changed-index-file.outputs.any_changed == 'true'
-      #   uses: JasonEtco/create-an-issue@v2
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     filename: .github/ISSUE_TEMPLATE/file-changed.md
-      #     update_existing: true
+      - name: Ran from workflow dispatch - prod
+        # Only publish to prod when triggered to do so
+        if: ${{ github.event_name == 'workflow_dispatch' }} && ${{ inputs.deploy_location == 'prod' }} 
+        run: |
+          echo "Workflow dispatch prod"
 
-      - name: Set PR Number
-        if: steps.changed-index-file.outputs.any_changed == 'true'
-        id: pr_number
-        run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-
-      # - name: Create issue if changed file
-      #   if: steps.changed-index-file.outputs.any_changed == 'true'
-      #   run: gh issue create --title "Update homepage index.md file" --body "The upstream index.js file changed with PR \#$PR_NUMBER. Update the docs/index.md file to reflect the changes." --assignee MonicaG
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 'Create Pull Request'
-        if: ${{ steps.changed-index-file.outputs.any_changed == 'true' }}
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.DEMO_CI_TOKEN }}
-          script: |
-            const { PR_NUMBER } = process.env
-            await github.rest.issues.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            assignee: 'MonicaG',
-            title: "File changed",
-            body: `Please review the newer version and address the changes. PR #${PR_NUMBER}`
-            });
+      - name: Ran from workflow dispatch - prod
+        if: ${{ github.event_name == 'workflow_dispatch' }} && ${{ inputs.deploy_location == 'dev' }} 
+        run: |
+          echo "Workflow dispatch dev"
