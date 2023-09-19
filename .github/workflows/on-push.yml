@@ -17,7 +17,7 @@ on:
         - prod  
 
 jobs:
-  check-for-changed-file:
+  jobs-to-run:
     runs-on: ubuntu-latest     
 
     steps:
@@ -32,7 +32,7 @@ jobs:
 
       - name: Ran from workflow dispatch - prod
         # Only publish to prod when triggered to do so
-        if: ${{ github.event_name == 'workflow_dispatch' }} 
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy_location == 'dev'
         run: |
           echo "Workflow dispatch prod"
 
