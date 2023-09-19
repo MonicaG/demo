@@ -1,4 +1,4 @@
-name: check for changed file
+name: on-push workflow
 
 # Controls when the workflow will run
 on:
@@ -26,17 +26,17 @@ jobs:
         with:
           fetch-depth: 0
   
-      - name: Ran from workflow dispatch - prod
+      - name: Ran from push to prod
         run: |
             echo "Should always run"    
 
       - name: Ran from workflow dispatch - prod
         # Only publish to prod when triggered to do so
-        if: ${{ github.event_name == 'workflow_dispatch' }} && ${{ inputs.deploy_location == 'prod' }} 
+        if: ${{ github.event_name == 'workflow_dispatch' }} 
         run: |
           echo "Workflow dispatch prod"
 
-      - name: Ran from workflow dispatch - prod
-        if: ${{ github.event_name == 'workflow_dispatch' }} && ${{ inputs.deploy_location == 'dev' }} 
-        run: |
-          echo "Workflow dispatch dev"
+      # - name: Ran from workflow dispatch - dev
+      #   if: ${{ github.event_name == 'workflow_dispatch' }} && ${{ inputs.deploy_location == 'dev' }} 
+      #   run: |
+      #     echo "Workflow dispatch dev"
